@@ -14,6 +14,9 @@ minetest.register_node("crystalhearts:crystalheart", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky=3,oddly_breakable_by_hand=3},
+		on_punch = function(pos, node, puncher) 
+		reduce_hp(puncher)
+		end
 })
 
 minetest.register_ore({
@@ -26,3 +29,12 @@ minetest.register_ore({
     height_min     = -31000,
     height_max     = -200,
 })
+
+function reduce_hp(player)
+			hp = player:get_hp() 
+			--hp = math.floor(hp+0.5)	 
+			hp= hp-1
+			player:set_hp(tonumber(hp))
+end
+
+print("Crystal Hearts Mod Loaded!")
